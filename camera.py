@@ -6,6 +6,44 @@ class WicCamera:
     def takePicture(self):
         camera = PiCamera()
 
+        for x in range(0,4):
+            camera.start_preview()
+            sleep(3)
+            camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            camera.stop_preview()
+
+        camera.close()
+
+    def takeCartoon(self):
+        camera = PiCamera()
+
+        camera.image_effect = 'cartoon' 
+
+        for x in range(0,4):
+            camera.start_preview()
+            sleep(2)
+            camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            camera.stop_preview()
+
+        camera.close()
+
+    def takePastel(self):
+        camera = PiCamera()
+
+        camera.image_effect = 'pastel' 
+
+        for x in range(0,4):
+            camera.start_preview()
+            sleep(2)
+            camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            camera.stop_preview()
+
+        camera.close()
+        
+    def preview(self):
+        camera = PiCamera()
+        camera.start_preview()
+        
         ##_______________________Test Area_____________________
         ##camera.start_preview()
         ##camera.image_effect = 'cartoon' 
@@ -13,20 +51,28 @@ class WicCamera:
         ##camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
         ##camera.stop_preview()
 
-        camera.rotation = 180
-        camera.start_preview()
+##        camera.rotation = 180
+##        camera.start_preview()
+##        sleep(2)
+##        camera.stop_preview()
+##        camera.capture_sequence([
+##            '/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg',
+##            '/home/pi/Desktop/image-' + time.strftime("-%Y-%m-%d-%H:%M:%S") + '.jpg',
+##            ])
+            
 
-        def countdown( num):
-            camera.annotate_text = num
-
-        for i in range(5,0,-1):
-            countdown(str(i))
-            sleep(1)
-
-            camera.annotate_text = 'Say Cheese!'
-        sleep(1)
-        camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
-        camera.stop_preview()
+##        def countdown( num):
+##            camera.annotate_text = num
+##
+##        for i in range(5,0,-1):
+##            countdown(str(i))
+##            sleep(1)
+##
+##            camera.annotate_text = 'Say Cheese!'
+        ##sleep(1)
+##        camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+        
+##        camera.close()
         ##_______________________Test Area_____________________
 
 

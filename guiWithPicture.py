@@ -27,19 +27,29 @@ from camera import WicCamera
 
 cam = WicCamera()
 
-def snapshot():
-    cam.takePicture()
+##def snapshot():
+##    cam.takePicture()
 
+cam.preview()
 root = Tk()
-imgFrame = Frame(root)
+##imgFrame = Frame(root)
 img = PhotoImage(file = "/home/pi/Desktop/cuteWelcome.gif")
 w1 = Label(root, image = img)
-w1.grid(row = 0, column = 0)
-w2 = Button(root, text = "Take Picture", command = snapshot)
-w2.grid(row = 2, column = 2)
-w3 = Button(root, text = "New Button", command = snapshot)
-w3.grid(row = 1, column = 2)
+w1.grid(row = 0, column = 1)
 
+w2 = Button(root, text = "Take Picture", command = cam.takePicture)
+w2.grid(row = 2, column = 0, pady = 15, padx = 10)
+
+w3 = Button(root, text = "Cartoon", command = cam.takeCartoon)
+w3.grid(row = 2, column = 1)
+
+w4 = Button(root, text = "Pastel", command = cam.takePastel)
+w4.grid(row = 2, column = 2, pady = 15, padx = 10)
+
+w5 = Label(root, text = "Please choose a filter.  You have 5 seconds to pose!")
+w5.grid(row = 1, column = 1, pady = 10)
+
+root.mainloop()
 
 ##img = img.subsample(2,2)
 ##w1 = Label(root, image = img).pack(side="top")
@@ -48,4 +58,4 @@ w3.grid(row = 1, column = 2)
 ##w2 = Button(root, text = "Take Picture", command = snapshot).pack(side="bottom")
 ##w3 = Button(root, text = "New Button", command = snapshot).pack(side="bottom")
 
-root.mainloop()
+
