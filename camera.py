@@ -2,47 +2,52 @@ from picamera import PiCamera
 from time import sleep
 import time
 class WicCamera:
-    
+
+  
+    def __init__(self, camera):
+        self.camera = camera
+        self.folder = '/home/pi/Desktop/PhotoBooth/image-'
     def takePicture(self):
-        camera = PiCamera()
-
+        
+        print("BG take pic")
+        
         for x in range(0,4):
-            camera.start_preview()
+            #self.camera.start_preview(fullscreen=False, window=(800, 300, 300, 300))
             sleep(3)
-            camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
-            camera.stop_preview()
+            self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            #self.camera.stop_preview()
 
-        camera.close()
+        ##self.camera.close()
+        print("end of take pic")
 
     def takeCartoon(self):
-        camera = PiCamera()
 
-        camera.image_effect = 'cartoon' 
-
+        self.camera.image_effect = 'cartoon' 
+        print("BG of take Cartoon")
         for x in range(0,4):
-            camera.start_preview()
+            ##camera.start_preview()
             sleep(2)
-            camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
-            camera.stop_preview()
+            self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            ##camera.stop_preview()
 
-        camera.close()
-
+        ##self.camera.close()
+        print("end of take Cartoon")
+        
     def takePastel(self):
-        camera = PiCamera()
 
-        camera.image_effect = 'pastel' 
+        self.camera.image_effect = 'pastel' 
 
         for x in range(0,4):
-            camera.start_preview()
+            ##camera.start_preview()
             sleep(2)
-            camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
-            camera.stop_preview()
+            self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            ##camera.stop_preview()
 
-        camera.close()
+        ##self.camera.close()
         
     def preview(self):
-        camera = PiCamera()
-        camera.start_preview()
+
+        self.camera.start_preview(fullscreen=False, window=(800, 300, 300, 300))
         
         ##_______________________Test Area_____________________
         ##camera.start_preview()
