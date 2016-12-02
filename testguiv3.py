@@ -28,7 +28,7 @@ class MainApplication(Frame):
         
         label2 = Label(self,
                       text = "Choose a filter from the drop down menu.", padx = 10, pady = 10).grid(row = 1,
-                                                                           column = 0)
+                                                                           column = 1)
         
         self.options = ["default", "cartoon", "pastel"]
         self.var = StringVar()
@@ -36,13 +36,13 @@ class MainApplication(Frame):
         self.drop = OptionMenu(self,
                                self.var,
                                *self.options,
-                               command = self.dropfunction).grid(row = 2, column = 0)
+                               command = self.dropfunction).grid(row = 2, column = 1)
 
         label3 = Label(self, text = "When you're ready, click the button below.", padx = 10, pady = 10).grid(row = 3,
-                                                                           column = 0)
+                                                                           column = 1)
         
         button1 = Button(self, text = "Take Picture",
-                command = self.button1_event).grid(row = 4, column = 0, padx = 10, pady = 10)
+                command = self.button1_event).grid(row = 4, column = 1, padx = 10, pady = 10)
 
         
     
@@ -71,6 +71,8 @@ class MainApplication(Frame):
         else:
             if self.filter == "cartoon":
                 self.wiccamera.takeCartoon()
+            else:
+                self.wiccamera.takePastel()
         ##root.destroy()
 ##
 ##    def button2_event(self):
@@ -90,12 +92,13 @@ class MainApplication(Frame):
         self.camera = picamera.PiCamera()
         self.camera.resolution = (1024,768)
         self.camera.preview_fullscreen = False
-        self.camera.preview_window = (501,443,497,520)
+        self.camera.preview_window = (0,30,497,520)
         self.camera.start_preview()
 
 
 root = Tk()                             
 root.title("GUI Test")
-root.geometry("500x600+500+500") # force main frame to be certain size and location
+root.geometry("500x600+0+0") # force main frame to be certain size and location
 app = MainApplication(root)         # make an object
+root.pack()
 root.mainloop()
