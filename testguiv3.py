@@ -90,7 +90,7 @@ class MainApplication(Frame):
     def setup_picam(self):
         print("This is where you would start the preview of the camera")
         self.camera = picamera.PiCamera()
-        self.camera.resolution = (1024,768)
+        self.camera.resolution = (1080,720)
         self.camera.preview_fullscreen = False
         self.camera.preview_window = (0,30,497,520)
         self.camera.start_preview()
