@@ -46,7 +46,7 @@ class WicCamera:
         ##self.camera.close()
         
     def preview(self):
-
+        camera.hflip = True
         self.camera.rotation = 270
         self.camera.start_preview(fullscreen=False, window=(800, 300, 300, 300))
         
