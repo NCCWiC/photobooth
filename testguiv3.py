@@ -22,12 +22,12 @@ class MainApplication(Frame):
         """ setup gui widgets here  """
            
         img = PhotoImage(file = "/home/pi/Desktop/cuteWelcome.gif")
-        label1 = Label(self, image = img).grid(row = 0, column = 0)
+        label1 = Label(self, image = img).grid(row = 1, column = 0)
         self.image = img
 
         
         label2 = Label(self,
-                      text = "Choose a filter from the drop down menu.", padx = 10, pady = 10).grid(row = 1,
+                      text = "Choose a filter from the drop down menu.", padx = 10, pady = 10).grid(row = 0,
                                                                            column = 1)
         
         self.options = ["default", "cartoon", "pastel"]
@@ -36,13 +36,13 @@ class MainApplication(Frame):
         self.drop = OptionMenu(self,
                                self.var,
                                *self.options,
-                               command = self.dropfunction).grid(row = 2, column = 1)
+                               command = self.dropfunction).grid(row = 1, column = 1)
 
-        label3 = Label(self, text = "When you're ready, click the button below.", padx = 10, pady = 10).grid(row = 3,
+        label3 = Label(self, text = "When you're ready, click the button below.", padx = 10, pady = 10).grid(row = 2,
                                                                            column = 1)
         
         button1 = Button(self, text = "Take Picture",
-                command = self.button1_event).grid(row = 4, column = 1, padx = 10, pady = 10)
+                command = self.button1_event).grid(row = 3, column = 1, padx = 10, pady = 10)
 
         
     
