@@ -47,6 +47,7 @@ class WicCamera:
         
     def preview(self):
 
+        self.camera.rotation = 270
         self.camera.start_preview(fullscreen=False, window=(800, 300, 300, 300))
         
         ##_______________________Test Area_____________________
