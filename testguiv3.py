@@ -4,6 +4,7 @@ from time import sleep
 from picamera import PiCamera
 import picamera
 from camera import WicCamera
+from gui2 import GUI2
 
 # demo app by Steve O. Working 11/18
 # shows gui and cam preview at same time
@@ -22,12 +23,12 @@ class MainApplication(Frame):
         """ setup gui widgets here  """
            
         img = PhotoImage(file = "/home/pi/Desktop/cuteWelcome.gif")
-        label1 = Label(self, image = img).grid(row = 1, column = 0)
+        label1= Label(self, image = img, width=200, height=200).grid(row = 1, column = 0)
         self.image = img
 
         
         label2 = Label(self,
-                      text = "Choose a filter from the drop down menu.", padx = 10, pady = 10).grid(row = 0,
+                      text = "Choose a filter from the drop down menu.", padx = 20, pady = 20).grid(row = 0,
                                                                            column = 1)
         
         self.options = ["default", "cartoon", "pastel"]
@@ -36,15 +37,14 @@ class MainApplication(Frame):
         self.drop = OptionMenu(self,
                                self.var,
                                *self.options,
-                               command = self.dropfunction).grid(row = 1, column = 1)
+                               command = self.dropfunction).grid(row = 1, column = 1, padx = 20, pady=20)
 
         label3 = Label(self, text = "When you're ready, click the button below.", padx = 10, pady = 10).grid(row = 2,
-                                                                           column = 1)
+                                                                           column = 1, padx = 20, pady=20)
         
         button1 = Button(self, text = "Take Picture",
-                command = self.button1_event).grid(row = 3, column = 1, padx = 10, pady = 10)
+                command = self.button1_event).grid(row = 3, column = 1, padx = 20, pady = 20)
 
-        
     
     def dropfunction(self, value):
         
@@ -66,6 +66,7 @@ class MainApplication(Frame):
        
     def button1_event(self):
         self.wiccamera = WicCamera(self.camera)
+        
         if self.filter == "default":
             self.wiccamera.takePicture()
         else:
@@ -73,6 +74,15 @@ class MainApplication(Frame):
                 self.wiccamera.takeCartoon()
             else:
                 self.wiccamera.takePastel()
+
+        # added 12/07 s.o
+        # sleep then launch another window
+        # second window will need to be edited to suit needs
+        sleep(1)
+        self.newWindow = Toplevel(self.master)
+        self.app = GUI2(self.newWindow)
+
+        
         ##root.destroy()
 ##
 ##    def button2_event(self):
@@ -91,14 +101,24 @@ class MainApplication(Frame):
         print("This is where you would start the preview of the camera")
         self.camera = picamera.PiCamera()
         self.camera.resolution = (1080,720)
+        self.camera.rotation = 270
+        self.camera.hflip = True
         self.camera.preview_fullscreen = False
-        self.camera.preview_window = (0,30,497,520)
+        self.camera.preview_window = (15,30,330,380)
         self.camera.start_preview()
 
+        self.filter = "default"
+        
+        
+#    def creat_window():
+#        window = tk.TopLevel(root)
 
-root = Tk()                             
+        
+
+
+root = Tk()
 root.title("GUI Test")
-root.geometry("500x600+0+0") # force main frame to be certain size and location
+root.geometry("800x380+0+0") # force main frame to be certain size and location
 app = MainApplication(root)         # make an object
-root.pack()
+app.pack()
 root.mainloop()
