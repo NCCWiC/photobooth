@@ -1,55 +1,85 @@
 from picamera import PiCamera
 from time import sleep
 import time
+
 class WicCamera:
 
   
     def __init__(self, camera):
         self.camera = camera
         self.folder = '/home/pi/Desktop/PhotoBooth/image-'
+        self.camera.annotate_text_size = 100
+        #self.camera.annotate_background = camera.Color('black')
     def takePicture(self):
         
         print("BG take pic")
+
+        self.camera.annotate_text = 'Get ready!'
         
         for x in range(0,4):
             #self.camera.start_preview(fullscreen=False, window=(800, 300, 300, 300))
-            sleep(3)
+            
+            sleep(2)
+            # added on 12/7 s.o
+            # annotation otherwise can't tell when pic is taken
+            self.camera.annotate_text = 'Taking pic ' + str(x+1)
+            self.camera.annotate_text = '' # take off annotation right before
+                                           # taking pic so its not in image 
             self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            self.camera.annotate_text = 'Taking pic ' + str(x+1)
             #self.camera.stop_preview()
 
         ##self.camera.close()
         print("end of take pic")
+        sleep(1)
+        self.camera.annotate_text = 'Done Taking pics'
+
+       
 
     def takeCartoon(self):
 
         self.camera.image_effect = 'cartoon' 
         print("BG of take Cartoon")
+        self.camera.annotate_text = 'Get ready!'
+        
         for x in range(0,4):
             ##camera.start_preview()
             sleep(2)
             self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            self.camera.annotate_text = 'Taking pic ' + str(x+1)
+            self.camera.annotate_text = '' # take off annotation right before
+                                           # taking pic so its not in image 
+            self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            self.camera.annotate_text = 'Taking pic ' + str(x+1)
             ##camera.stop_preview()
 
         ##self.camera.close()
         print("end of take Cartoon")
+        self.camera.annotate_text = 'Done Taking pics'
         
     def takePastel(self):
 
         self.camera.image_effect = 'pastel' 
-
+        self.camera.annotate_text = 'Get ready!'
+        
         for x in range(0,4):
             ##camera.start_preview()
             sleep(2)
             self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            self.camera.annotate_text = 'Taking pic ' + str(x+1)
+            self.camera.annotate_text = '' # take off annotation right before
+                                           # taking pic so its not in image 
+            self.camera.capture(self.folder + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
+            self.camera.annotate_text = 'Taking pic ' + str(x+1)
             ##camera.stop_preview()
 
         ##self.camera.close()
+        self.camera.annotate_text = 'Done Taking pics'
         
     def preview(self):
-        camera.hflip = True
-        self.camera.rotation = 270
         self.camera.start_preview(fullscreen=False, window=(800, 300, 300, 300))
-        
+        self.camera.rotation = 270
+        ##self.camera.hflip = True
         ##_______________________Test Area_____________________
         ##camera.start_preview()
         ##camera.image_effect = 'cartoon' 
@@ -125,4 +155,3 @@ class WicCamera:
         ##camera.capture('/home/pi/Desktop/image-' + time.strftime("%Y-%m-%d-%H:%M:%S") + '.jpg')
         ##camera.stop_preview()
         ##----------------------------------------
-
