@@ -5,6 +5,7 @@ from picamera import PiCamera
 import picamera
 from camera import WicCamera
 from gui2 import GUI2
+from keyboard import GUIKeyboard
 
 # demo app by Steve O. Working 11/18
 # shows gui and cam preview at same time
@@ -79,8 +80,10 @@ class MainApplication(Frame):
         # sleep then launch another window
         # second window will need to be edited to suit needs
         sleep(1)
-        self.newWindow = Toplevel(self.master)
-        self.app = GUI2(self.newWindow)
+        ##self.newWindow = Toplevel(self.master)
+        ## to have the 2x2 option window self.app = GUI2(self.newWindow)
+        ##open the keyboard window
+        self.app = GUIKeyboard()
 
         
         ##root.destroy()
